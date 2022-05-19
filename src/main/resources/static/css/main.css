@@ -1,0 +1,65 @@
+.CloseModalXButton {
+    padding: 1rem;
+    background-color: transparent;
+    border: 0;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+}
+.CloseModalXButton:hover {
+    color: #000;
+    opacity: 0.75;
+}
+
+
+.form-group {
+    margin-top: 20px;
+}
+
+
+nav .navItem {
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}
+nav .navItem a {
+    color: #fff;
+    text-decoration: none;
+}
+nav .navItem img {
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+nav h1 {
+    margin: 0px !important;
+}
+
+
+header {
+    margin-bottom: 15px;
+}
+
+
+tbody tr {
+    line-height: 38px;
+}
+.btnArea {
+    display: flex; 
+    justify-content: space-around;
+}
+
+
+footer {
+    position: fixed; 
+    bottom: 0px; 
+    width: 100%;
+}
+footer div p {
+    color: white; 
+    margin: 0px;
+}

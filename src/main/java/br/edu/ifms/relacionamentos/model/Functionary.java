@@ -19,21 +19,21 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Funcionario {
+public class Functionary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String nome;
-    private String cargo;
-    private double salario;
+    private String name;
+    private String position;
+    private double salary;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "PROJETO_FUNCIONARIO", 
-        joinColumns = {@JoinColumn(name = "FUNCIONARIO_ID")},
-        inverseJoinColumns = {@JoinColumn(name = "PROJETO_ID")}
+        name = "PROJECT_EMPLOYEE", 
+        joinColumns = {@JoinColumn(name = "EMPLOYEE_ID")},
+        inverseJoinColumns = {@JoinColumn(name = "PROJECT_ID")}
     )
-    private List<Projeto> projetos;
+    private List<Project> projects;
 }

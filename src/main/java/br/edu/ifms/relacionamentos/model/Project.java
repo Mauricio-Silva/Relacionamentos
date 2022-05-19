@@ -15,16 +15,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Projeto {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String nome;
-    private double custoTotal;
-    private int duracao; //meses
+    private String name;
+    private double totalCost;
+    private int duration; //meses
 
-    @ManyToMany(mappedBy = "projetos")
-    private List<Funcionario> funcionarios;
+    @ManyToMany(mappedBy = "projects")
+    private List<Functionary> functionaries;
 }
