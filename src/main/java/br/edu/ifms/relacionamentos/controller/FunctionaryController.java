@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.ifms.relacionamentos.model.Functionary;
+import br.edu.ifms.relacionamentos.model.Project;
 import br.edu.ifms.relacionamentos.service.FunctionaryService;
+import br.edu.ifms.relacionamentos.service.ProjectService;
 
 @Controller
 @RequestMapping("/functionary")
@@ -20,6 +22,9 @@ public class FunctionaryController {
 
     @Autowired
     FunctionaryService functionaryService;
+
+    @Autowired
+    ProjectService projectService;
     
 
     @GetMapping("/")
@@ -27,6 +32,8 @@ public class FunctionaryController {
         List<Functionary> functionariesList = functionaryService.getAllFunctionaries();
         html.addAttribute("functionariesList", functionariesList);
         html.addAttribute("noDataFunctionary", new Functionary());
+        List<Project> projectsList = projectService.getAllProjects();
+        html.addAttribute("projectsList", projectsList);
         return "functionary";
     }
 

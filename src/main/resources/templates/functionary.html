@@ -38,6 +38,13 @@
                   <label for="RegisterModalInputSalary">Salário</label>
                   <input th:field="*{salary}" type="text" class="form-control" id="RegisterModalInputSalary" placeholder="Digite o Salário" required/>
                 </div>
+                
+                <div class="form-group">
+                  <label for="RegisterModalSelectProjects">Projetos</label>
+                  <select th:field="*{projects}" class="form-control" id="RegisterModalSelectProjects">
+                    <option th:each="project: ${projectsList}" th:value="${project}" th:text="${project.name}"></option>
+                  </select>
+                </div>
 
               </div>
             </div>
