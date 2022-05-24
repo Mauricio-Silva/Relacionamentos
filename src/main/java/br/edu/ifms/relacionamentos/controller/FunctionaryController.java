@@ -64,11 +64,11 @@ public class FunctionaryController {
         Functionary functionary = functionaryService.getFunctionaryById(FuncId);
         Project project = projectService.getProjectById(ProjId);
 
-        // functionary.getProjects().add(project);
-        // functionaryService.saveFunctionary(functionary);
+        functionary.getProjects().add(project);
+        functionaryService.saveFunctionary(functionary);
         
-        // project.getFunctionaries().add(functionary);
-        // projectService.saveProject(project);
+        project.getFunctionaries().add(functionary);
+        projectService.saveProject(project);
     
         return "redirect:/functionary/";
     }

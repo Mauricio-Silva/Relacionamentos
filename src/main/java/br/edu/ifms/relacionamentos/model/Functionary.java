@@ -29,7 +29,7 @@ public class Functionary {
     private String position;
     private double salary;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "PROJECT_FUNCTIONARY", 
         joinColumns = {@JoinColumn(name = "FUNCTIONARY_ID")},

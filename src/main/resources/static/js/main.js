@@ -49,9 +49,10 @@ function AssociateFuncId(url, id) {
     document.getElementById("AssociationModalLink").href = url + "/" + id + "/" + selectedItem;
 }
 
+
 function AssociateProjId() {
     var url = document.getElementById("AssociationModalLink").href;
-    console.log(url);
+    var url = url.substr(0, url.length - 1)
     var selectedItem = document.getElementById("AssociationModalSelectProject").value;
-    document.getElementById("AssociationModalLink").href = url + "/" + selectedItem;
+    document.getElementById("AssociationModalLink").href = url + selectedItem;
 }
