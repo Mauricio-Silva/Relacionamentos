@@ -7,5 +7,5 @@ import br.edu.ifms.relacionamentos.model.Functionary;
 
 @Repository
 public interface FunctionaryRepository extends JpaRepository<Functionary, Integer> {
-    
+
 }

@@ -57,4 +57,19 @@ public class FunctionaryController {
         functionaryService.saveFunctionary(functionary);
         return "redirect:/functionary/";
     }
+
+
+    @GetMapping("/ass/{FuncId}/{ProjId}")
+    public String associateProjects(@PathVariable("FuncId") int FuncId, @PathVariable("ProjId") int ProjId) {
+        Functionary functionary = functionaryService.getFunctionaryById(FuncId);
+        Project project = projectService.getProjectById(ProjId);
+
+        // functionary.getProjects().add(project);
+        // functionaryService.saveFunctionary(functionary);
+        
+        // project.getFunctionaries().add(functionary);
+        // projectService.saveProject(project);
+    
+        return "redirect:/functionary/";
+    }
 }

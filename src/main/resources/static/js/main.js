@@ -40,3 +40,18 @@ function UpdateObj(obj) {
         item.value = lista[id + 1];
     });
 }
+
+
+
+//
+function AssociateFuncId(url, id) {
+    var selectedItem = document.getElementById("AssociationModalSelectProject").value;
+    document.getElementById("AssociationModalLink").href = url + "/" + id + "/" + selectedItem;
+}
+
+function AssociateProjId() {
+    var url = document.getElementById("AssociationModalLink").href;
+    console.log(url);
+    var selectedItem = document.getElementById("AssociationModalSelectProject").value;
+    document.getElementById("AssociationModalLink").href = url + "/" + selectedItem;
+}

@@ -23,7 +23,7 @@
           <form th:action="@{/functionary/save}" th:object="${noDataFunctionary}" method="post">
             <div class="modal-body">
               <div class="form-row">
-
+                
                 <div class="form-group">
                   <label for="RegisterModalInputName">Nome</label>
                   <input th:field="*{name}" type="text" class="form-control" id="RegisterModalInputName" placeholder="Digite um Nome" required/>
@@ -38,13 +38,6 @@
                   <label for="RegisterModalInputSalary">Salário</label>
                   <input th:field="*{salary}" type="text" class="form-control" id="RegisterModalInputSalary" placeholder="Digite o Salário" required/>
                 </div>
-                
-                <div class="form-group">
-                  <label for="RegisterModalSelectProjects">Projetos</label>
-                  <select th:field="*{projects}" class="form-control" id="RegisterModalSelectProjects">
-                    <option th:each="project: ${projectsList}" th:value="${project}" th:text="${project.name}"></option>
-                  </select>
-                </div>
 
               </div>
             </div>
@@ -57,8 +50,8 @@
       </div>
     </div>
     
-
-
+    
+    
     <!----- Modal Delete ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -77,9 +70,9 @@
         </div>
       </div>
     </div>
-
-
-
+    
+    
+    
     <!----- Modal Update ----------------------------------------------------------->
     <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -93,22 +86,22 @@
           <form th:action="@{/functionary/update}" th:object="${noDataFunctionary}" method="post" id="UpdateModalForm">
             <div class="modal-body">
               <div class="form-row">
-
+                
                 <div class="form-group">
                   <label for="UpdateModalInputName">Nome</label>
                   <input th:field="*{name}" type="text" class="form-control MI" id="UpdateModalInputName" placeholder="Informe o Nome"/>
                 </div>
-
+                
                 <div class="form-group">
                   <label for="UpdateModalInputPosition">Cargo</label>
                   <input th:field="*{position}" type="text" class="form-control MI" id="UpdateModalInputPosition" placeholder="Informe o Cargo"/>
                 </div>
-
+                
                 <div class="form-group">
                   <label for="UpdateModalInputSalary">Salary</label>
                   <input th:field="*{salary}" type="text" class="form-control MI" id="UpdateModalInputSalary" placeholder="Informe a Salário"/>
                 </div>
-
+                
               </div>
             </div>
             <div class="modal-footer">
@@ -116,6 +109,38 @@
               <button type="submit" class="btn btn-success">Atualizar</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+    
+
+
+    <!----- Modal Association --------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="AssociationModal" tabindex="-1" role="dialog" aria-labelledby="AssociationModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="AssociationModalLabel">Associar Projetos</h5>
+            <button type="button" class="close CloseModalXButton" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+              
+              <div class="form-group">
+                <label for="AssociationModalSelectProject">Projetos</label>
+                <select class="form-control" id="AssociationModalSelectProject" th:attr="onchange=|AssociateProjId()|">
+                  <option th:each="project: ${projectsList}" th:value="${project.id}" th:text="${project.name}"></option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            <a class="btn btn-success" id="AssociationModalLink">Associar</a>
+          </div>
         </div>
       </div>
     </div>
@@ -178,8 +203,18 @@
                 <th th:text="${functionary.position}" scope="row"></th>
                 <th th:text="${functionary.salary}" scope="row"></th>
                 <th class="btnArea">
-                  <a class="btn btn-primary" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateObj('${functionary}')|">Editar</a>
-                  <a class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal" th:attr="onclick=|DeleteObj('/functionary', '${functionary.id}')|">Excluir</a>
+                  <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateObj('${functionary}')|">
+                    <img th:src="@{/images/pencil.png}" alt="Pencil" width="30" height="30"/>
+                  </a>
+                  <a class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal" th:attr="onclick=|DeleteObj('/functionary', '${functionary.id}')|">
+                    <img th:src="@{/images/trash.png}" alt="Pencil" width="30" height="30"/>
+                  </a>
+                  <a class="btn btn-info" data-toggle="modal" data-target="#AssociationModal" th:attr="onclick=|AssociateFuncId('/functionary/ass', '${functionary.id}')|">
+                    <img th:src="@{/images/flow.png}" alt="Pencil" width="30" height="30"/>                    
+                  </a>
+                  <a class="btn btn-info" data-toggle="modal" data-target="#InfoModal" th:attr="onclick=|InfoObj('${functionary}')|">
+                    <img th:src="@{/images/info.png}" alt="Pencil" width="30" height="30"/>
+                  </a>
                 </th>
               </tr>
             </tbody>
@@ -188,6 +223,7 @@
 
           <!----- No Restults Message ------------------------------------------------------------>
           <p class="no-results" th:if="${functionariesList.isEmpty}">Nenhum resultado encontrado</p>
+         
 
         </div>
       </div>

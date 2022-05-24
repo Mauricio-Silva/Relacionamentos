@@ -29,10 +29,10 @@ public class Functionary {
     private String position;
     private double salary;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
-        name = "PROJECT_EMPLOYEE", 
-        joinColumns = {@JoinColumn(name = "EMPLOYEE_ID")},
+        name = "PROJECT_FUNCTIONARY", 
+        joinColumns = {@JoinColumn(name = "FUNCTIONARY_ID")},
         inverseJoinColumns = {@JoinColumn(name = "PROJECT_ID")}
     )
     private List<Project> projects;
