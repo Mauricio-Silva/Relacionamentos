@@ -3,9 +3,9 @@ package br.edu.ifms.relacionamentos.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.edu.ifms.relacionamentos.model.Functionary;
+import br.edu.ifms.relacionamentos.model.Webtoon;
 
 @Repository
-public interface FunctionaryRepository extends JpaRepository<Functionary, Integer> {
-
+public interface WebtoonRepository extends JpaRepository<Webtoon, Integer> {
+    
 }
