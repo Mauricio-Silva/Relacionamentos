@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>BR Scanlator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="shortcut icon" th:href="@{/images/spring_framework_logo.png}" type="image/x-icon">
+  </head>
+  <body>
+    
+
+    <!----- Modal Register ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="RegisterModalLabel">Cadastrar Artista</h5>
+            <button type="button" class="close CloseModalXButton" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form th:action="@{/artist/save}" th:object="${noDataArtist}" method="post">
+            <div class="modal-body">
+              <div class="form-row">
+                
+                <div class="form-group">
+                    <label for="RegisterModalInputName">Nome</label>
+                    <input th:field="*{name}" type="text" class="form-control" name="name" id="RegisterModalInputName" placeholder="Digite um Nome" required/>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <!----- Modal Delete ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="DeleteModalLabel">Excluir Artista</h5>
+            <button type="button" class="close CloseModalXButton" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Tem certeza que deseja excluir o Artista selecionado?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            <a type="button" class="btn btn-danger" id="DeleteModalButton">Excluir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <!----- Modal Update ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="UpdateModalLabel">Editar Artista</h5>
+            <button type="button" class="close CloseModalXButton" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form th:action="@{/artist/update}" th:object="${noDataArtist}" method="post" id="UpdateModalForm">
+            <div class="modal-body">
+              <div class="form-row">
+                
+                <div class="form-group">
+                  <label for="UpdateModalInputName">Nome</label>
+                  <input th:field="*{name}" type="text" class="form-control MI" id="UpdateModalInputName" placeholder="Informe o Nome"/>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-success">Atualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!----- Modal Info --------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="InfoModal" tabindex="-1" role="dialog" aria-labelledby="InfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="InfoModalLabel"></h5>
+                    <button type="button" class="close CloseModalXButton" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">ID</div>
+                        <div class="col" id="ArtInfoId"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Webtoons</div>
+                        <div class="col" id="ArtInfoWebtoons"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!----- Modal Association -------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="modal fade" id="AssModal" tabindex="-1" role="dialog" aria-labelledby="AssModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssModalLabel">Associar Webtoon</h5>
+                    <button type="button" class="close CloseModalXButton" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="AssModalSelectWebtoon">Webtoons</label>
+                        <select class="form-control" name="webtoons" id="AssModalSelectWebtoon" th:attr="onchange=|AssRelItem('AssModalLink', 'AssModalSelectWebtoon')|">
+                            <option th:each="webtoonItem : ${webtoonsList}" th:value="${webtoonItem.id}" th:text="${webtoonItem.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    <a class="btn btn-success" href="" id="AssModalLink">Associar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!----- Navegation Menu ---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-sm-around">
+      <div class="navItem">
+        <a th:href="@{/webtoon/}">
+          <img th:src="@{/images/spring_framework_logo_white.png}"/>
+        </a>
+      </div>
+      <h1 class="navbar-brand">BR Scanlator</h1>
+      <div class="navItem">
+        <a th:href="@{/webtoon/}">Webtoons</a>
+      </div>
+    </nav>
+
+
+
+    <!----- Header ------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <header>
+      <div class="container">
+        <div class="row">
+          <h2 class="mt-3">Artistas</h2>
+        </div>
+        <div class="row">
+          <div class="mt-2 mb-2">
+            <a class="btn btn-success" data-toggle="modal" data-target="#RegisterModal">
+              <i class="fas fa-user-plus"></i>
+              Cadastrar Novo Artista
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+
+    <!----- Table -------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <main>
+      <div class="container">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+
+            <thead class="table-dark">
+              <tr>
+                <th scope="col" class="col">ID</th>
+                <th scope="col" class="col-9">Nome</th>
+                <th scope="col" class="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="artist: ${artistsList}">
+                <th th:text="${artist.id}" scope="row" class="col"></th>
+                <th th:text="${artist.name}" scope="row" class="col-9"></th>
+                <th class="btnArea col">
+                  <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateObj('${artist}')|">
+                    <img th:src="@{/images/pencil.png}" alt="Pencil" width="30" height="30"/>
+                  </a>
+                  <a class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal" th:attr="onclick=|DeleteObj('/artist', '${artist.id}')|">
+                    <img th:src="@{/images/trash.png}" alt="Trash" width="30" height="30"/>
+                  </a>
+                  <a class="btn btn-info" data-toggle="modal" data-target="#AssModal" th:attr="onclick=|AssRelOwner('AssModalSelectWebtoon', 'AssModalLink', '/artist/ass', '${artist.id}')|">
+                    <img th:src="@{/images/flow.png}" alt="Flow" width="30" height="30"/>
+                  </a>
+                  <a class="btn btn-secondary" data-toggle="modal" data-target="#InfoModal" th:attr="onclick=|ShowArtInfo('${artist.id}', '${artist.name}', '${artist.webtoons}')|">
+                    <img th:src="@{/images/info.png}" alt="Info" width="30" height="30"/>
+                  </a>       
+                </th>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <!----- No Restults Message ------------------------------------------------------------------------------------------------------------------------------------------------------>
+          <p class="no-results" th:if="${artistsList.isEmpty}">Nenhum resultado encontrado</p>
+         
+
+        </div>
+      </div>
+    </main>
+
+
+
+    <!----- Footer ------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <footer class="bg-dark text-center text-lg-start">
+      <div class="text-center p-3">
+        <p>TADS5 - DBF-I - @Relacionamentos - © Desenvolvido por Mauricio</p>
+      </div>
+    </footer>
+
+
+
+    <!----- Scripts ------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+
+  </body>
+</html>

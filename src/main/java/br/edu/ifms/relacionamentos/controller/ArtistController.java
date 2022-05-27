@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.ifms.relacionamentos.model.Artist;
+import br.edu.ifms.relacionamentos.model.Webtoon;
 import br.edu.ifms.relacionamentos.service.ArtistService;
+import br.edu.ifms.relacionamentos.service.WebtoonService;
 
 @Controller
 @RequestMapping("/artist")
@@ -20,6 +22,9 @@ public class ArtistController {
 
     @Autowired
     ArtistService artistService;
+
+    @Autowired
+    WebtoonService webtoonService;
     
 
     @GetMapping("/")
@@ -27,6 +32,8 @@ public class ArtistController {
         List<Artist> artistsList = artistService.getAllArtists();
         html.addAttribute("artistsList", artistsList);
         html.addAttribute("noDataArtist", new Artist());
+        List<Webtoon> webtoonsList = webtoonService.getAllWebtoons();
+        html.addAttribute("webtoonsList", webtoonsList);
         return "artist";
     }
 
@@ -47,6 +54,16 @@ public class ArtistController {
 
     @PostMapping("/update/{id}")
     public String updateArtist(@PathVariable("id") int id, @ModelAttribute("noDataArtist") Artist artist) {
+        artistService.saveArtist(artist);
+        return "redirect:/artist/";
+    }
+
+
+    @GetMapping("/ass/{ArtistID}/{WebtoonID}")
+    public String associateArtist(@PathVariable("ArtistID") int ArtistID, @PathVariable("WebtoonID") int WebtoonID) {
+        Artist artist = artistService.getArtistById(ArtistID);
+        Webtoon webtoon = webtoonService.getWebtoonById(WebtoonID);
+        artist.getWebtoons().add(webtoon);
         artistService.saveArtist(artist);
         return "redirect:/artist/";
     }

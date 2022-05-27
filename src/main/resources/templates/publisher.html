@@ -101,9 +101,9 @@
           <img th:src="@{/images/spring_framework_logo_white.png}"/>
         </a>
       </div>
-      <h1 class="navbar-brand">Editoras</h1>
+      <h1 class="navbar-brand">BR Scanlator</h1>
       <div class="navItem">
-        <a th:href="@{//}"></a>
+        <a th:href="@{/webtoon/}">Webtoons</a>
       </div>
     </nav>
 
@@ -113,7 +113,7 @@
     <header>
       <div class="container">
         <div class="row">
-          <h2 class="mt-3">Relação de Editoras</h2>
+          <h2 class="mt-3">Editoras</h2>
         </div>
         <div class="row">
           <div class="mt-2 mb-2">
@@ -136,16 +136,16 @@
 
             <thead class="table-dark">
               <tr>
-                <th scope="col" class="col-1">ID</th>
-                <th scope="col" class="col-6">Nome</th>
-                <th scope="col" class="col-4"></th>
+                <th scope="col" class="col">ID</th>
+                <th scope="col" class="col-9">Nome</th>
+                <th scope="col" class="col"></th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="publisher: ${publishersList}">
-                <th th:text="${publisher.id}" scope="row" class="col-1"></th>
-                <th th:text="${publisher.name}" scope="row" class="col-6"></th>
-                <th class="btnArea col-4">
+                <th th:text="${publisher.id}" scope="row" class="col"></th>
+                <th th:text="${publisher.name}" scope="row" class="col-9"></th>
+                <th class="btnArea col">
                   <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateObj('${publisher}')|">
                     <img th:src="@{/images/pencil.png}" alt="Pencil" width="30" height="30"/>
                   </a>
