@@ -23,7 +23,7 @@
 nav .navItem {
     display: flex;
     justify-content: space-around;
-    width: 200px;
+    width: 250px;
 }
 nav .navItem a {
     color: #fff;
@@ -46,7 +46,7 @@ header {
 
 
 tbody tr {
-    line-height: 38px;
+    line-height: 44px;
 }
 .btnArea {
     display: flex; 
@@ -62,4 +62,15 @@ footer {
 footer div p {
     color: white; 
     margin: 0px;
+}
+
+
+
+
+#InfoModal .CloseModalXButton {
+    padding: 0 !important;
+}
+#InfoModal .row {
+    line-height: 44px;
+    padding: 0.5rem 0.5rem;
 }

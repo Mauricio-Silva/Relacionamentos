@@ -7,89 +7,109 @@
 
 
 
-//--- Delete Object ------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-// Envia o link para o botão do Modal Delete
-function DeleteObj(objName, id) {
-    var btnDeleteModal = document.getElementById("DeleteModalButton");
-    btnDeleteModal.setAttribute("href", objName + "/delete/" + id);
+//--- Publisher ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+function DeletePub(id) {
+    document.getElementById("DeleteModalButton").href = "/publisher/delete/" + id;
+}
+function UpdatePub(id, name) {
+    document.getElementById("UpdateModalForm").action = "/publisher/update/" + id;
+    document.getElementById("UpdateModalInputName").value = name;
 }
 
 
 
-//--- Update Object ------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-// Recebe um Objeto Model em String, mapeia as informações e as insere no Update Modal Form
-function UpdateObj(obj) {
-    // console.log(obj);
-    var a1 = obj.indexOf("(");
-    var a2 = obj.indexOf(")");
-
-    var objName = obj.slice(0, a1).toLowerCase()
-    // console.log(objName);
-    var data = obj.slice(a1 + 1, a2).split(",", 7);
-    // console.log(data);
-    
-    var lista = data.map(function(item) {
-        return item.slice(item.indexOf("=") + 1, item.length);
-    });
-    
-    // console.log(lista);
-    document.getElementById("UpdateModalForm").action = "/" + objName + "/update/" + lista[0];
-    
-    var inputs = document.querySelectorAll(".MI");
-    inputs.forEach(function(item, id) {
-        // console.log(id);
-        // console.log(lista[id + 1]);
-        item.value = lista[id + 1];
-    });
+//--- Artist ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+function DeleteArt(id) {
+    document.getElementById("DeleteModalButton").href = "/artist/delete/" + id;
+}
+function UpdateArt(id, name) {
+    document.getElementById("UpdateModalForm").action = "/artist/update/" + id;
+    document.getElementById("UpdateModalInputName").value = name;
+}
+function InfoArt(id, name, webtoons) {
+    document.getElementById("InfoModalLabel").innerHTML = name;
+    document.getElementById("ArtInfoId").innerHTML = id;
+    document.getElementById("ArtInfoWebtoons").innerHTML = webtoons;
+}
+function AssArtToWeb(id) {
+    var webtoonId = document.getElementById("AssModalSelectWebtoon").value;
+    document.getElementById("AssModalLink").href = "/artist/ass/" + id + "/" + webtoonId;
+}
+function AssArtToWebBySelect() {
+    var url = document.getElementById("AssModalLink").href;
+    var url = url.substr(0, url.length - 1)
+    var webtoonId = document.getElementById("AssModalSelectWebtoon").value;
+    document.getElementById("AssModalLink").href = url + webtoonId;
 }
 
 
 
-//--- Show Object Informations ------------------------------------------------------------------------------------------------------------------------------------------------------------->
-//
+//--- Genres ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+function DeleteGen(id) {
+    document.getElementById("DeleteModalButton").href = "/artist/delete/" + id;
+}
+function UpdateGen(id, name) {
+    document.getElementById("UpdateModalForm").action = "/artist/update/" + id;
+    document.getElementById("UpdateModalInputName").value = name;
+}
+function InfoGen(id, name, webtoons) {
+    document.getElementById("InfoModalLabel").innerHTML = name;
+    document.getElementById("GenInfoId").innerHTML = id;
+    document.getElementById("GenInfoWebtoons").innerHTML = webtoons;
+}
+function AssGenToWeb(id) {
+    var webtoonId = document.getElementById("AssModalSelectWebtoon").value;
+    document.getElementById("AssModalLink").href = "/artist/ass/" + id + "/" + webtoonId;
+}
+function AssGenToWebBySelect() {
+    var url = document.getElementById("AssModalLink").href;
+    var url = url.substr(0, url.length - 1)
+    var webtoonId = document.getElementById("AssModalSelectWebtoon").value;
+    document.getElementById("AssModalLink").href = url + webtoonId;
+}
+
+
+
+
+
+
+
+
+
+
+
+//--- Webtoon ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+function UpdateWeb(id, name, chapters, publisher, artist, genres) {
+    document.getElementById("UpdateModalForm").action = "/webtoon/update/" + id;
+    document.getElementById("UpdateModalInputName").value = name;
+    document.getElementById("UpdateModalInputChapters").value = chapters;
+    var publisherId = publisher.slice(publisher.indexOf("id") + 3, publisher.indexOf(","))
+    document.getElementById("UpdateModalSelectPublisher").value = publisherId;
+}
 function ShowWebInfo(id, name, chapters, publisher, artist, genres) {
-    
-    // console.log(id, name, chapters, publisher, artist, genres);
-
     document.getElementById("InfoModalLabel").innerHTML = name;
     document.getElementById("WebInfoId").innerHTML = id;
     document.getElementById("WebInfoChapters").innerHTML = chapters;
-
     var publisherName = publisher.slice(publisher.indexOf("name") + 5, publisher.indexOf(")"))
     document.getElementById("WebInfoPublisher").innerHTML = publisherName;
-
     document.getElementById("WebInfoArtist").innerHTML = artist;
-
     document.getElementById("WebInfoGenres").innerHTML = genres;
 }
 
 
-function ShowArtInfo(id, name, webtoons) {
-    
-    // console.log(id, name, webtoons);
-
-    document.getElementById("InfoModalLabel").innerHTML = name;
-    document.getElementById("ArtInfoId").innerHTML = id;
-
-    // var publisherName = publisher.slice(publisher.indexOf("name") + 5, publisher.indexOf(")"))
-    document.getElementById("ArtInfoWebtoons").innerHTML = webtoons;
-}
 
 
 
 
 
-
-
-
-
-//
+//--- Associate Objects -------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 function AssRelOwner(selectID, LinkID, URL, ObjID) {
     var selectedItem = document.getElementById(selectID).value;
     document.getElementById(LinkID).href = URL + "/" + ObjID + "/" + selectedItem;
 }
 
-//
+
+
 function AssRelItem(LinkID, selectID) {
     var url = document.getElementById(LinkID).href;
     var url = url.substr(0, url.length - 1)

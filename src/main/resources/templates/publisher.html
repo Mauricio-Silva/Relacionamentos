@@ -10,7 +10,7 @@
   <body>
     
 
-    <!----- Modal Register --------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!----- Modal Register ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -26,7 +26,7 @@
                 
                 <div class="form-group">
                   <label for="RegisterModalInputName">Nome</label>
-                  <input th:field="*{name}" type="text" class="form-control" id="RegisterModalInputName" placeholder="Digite um Nome" required/>
+                  <input id="RegisterModalInputName" th:field="*{name}" type="text" class="form-control" name="name" placeholder="Digite um Nome" required/>
                 </div>
 
               </div>
@@ -42,7 +42,7 @@
     
     
     
-    <!----- Modal Delete ----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!----- Modal Delete ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -63,7 +63,7 @@
     
     
     
-    <!----- Modal Update ----------------------------------------------------------->
+    <!----- Modal Update ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -79,7 +79,7 @@
                 
                 <div class="form-group">
                   <label for="UpdateModalInputName">Nome</label>
-                  <input th:field="*{name}" type="text" class="form-control MI" id="UpdateModalInputName" placeholder="Informe o Nome"/>
+                  <input id="UpdateModalInputName" th:field="*{name}" type="text" class="form-control" name="name" placeholder="Digite um Nome" required/>
                 </div>
                 
               </div>
@@ -94,7 +94,7 @@
     </div>
 
 
-    <!----- Navegation Menu ---------------------------------------------------------------------->
+    <!----- Navegation Menu ---------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-sm-around">
       <div class="navItem">
         <a th:href="@{/publisher/}">
@@ -104,12 +104,14 @@
       <h1 class="navbar-brand">BR Scanlator</h1>
       <div class="navItem">
         <a th:href="@{/webtoon/}">Webtoons</a>
+        <a th:href="@{/artist/}">Artistas</a>
+        <a th:href="@{/genre/}">Gêneros</a>
       </div>
     </nav>
 
 
 
-    <!----- Header ------------------------------------------------------------------------------->
+    <!----- Header ------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <header>
       <div class="container">
         <div class="row">
@@ -128,7 +130,7 @@
 
 
 
-    <!----- Table -------------------------------------------------------------------------------->
+    <!----- Table -------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <main>
       <div class="container">
         <div class="table-responsive">
@@ -146,10 +148,10 @@
                 <th th:text="${publisher.id}" scope="row" class="col"></th>
                 <th th:text="${publisher.name}" scope="row" class="col-9"></th>
                 <th class="btnArea col">
-                  <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateObj('${publisher}')|">
+                  <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdatePub('${publisher.id}', '${publisher.name}')|">
                     <img th:src="@{/images/pencil.png}" alt="Pencil" width="30" height="30"/>
                   </a>
-                  <a class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal" th:attr="onclick=|DeleteObj('/publisher', '${publisher.id}')|">
+                  <a class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal" th:attr="onclick=|DeletePub('${publisher.id}')|">
                     <img th:src="@{/images/trash.png}" alt="Pencil" width="30" height="30"/>
                   </a>      
                 </th>
@@ -158,7 +160,7 @@
           </table>
 
 
-          <!----- No Restults Message ------------------------------------------------------------>
+          <!----- No Restults Message ------------------------------------------------------------------------------------------------------------------------------------------------------>
           <p class="no-results" th:if="${publishersList.isEmpty}">Nenhum resultado encontrado</p>
          
 
@@ -168,7 +170,7 @@
 
 
 
-    <!----- Footer ------------------------------------------------------------------------------->
+    <!----- Footer ------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <footer class="bg-dark text-center text-lg-start">
       <div class="text-center p-3">
         <p>TADS5 - DBF-I - @Relacionamentos - © Desenvolvido por Mauricio</p>
@@ -177,7 +179,7 @@
 
 
 
-    <!----- Scripts ------------------------------------------------------------------------------>
+    <!----- Scripts ------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>

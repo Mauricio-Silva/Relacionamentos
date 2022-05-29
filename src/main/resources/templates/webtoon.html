@@ -25,27 +25,20 @@
               <div class="form-row">
                 
                 <div class="form-group">
-                    <label for="RegisterModalInputName">Nome</label>
-                    <input th:field="*{name}" type="text" class="form-control" name="name" id="RegisterModalInputName" placeholder="Digite um Nome" required/>
+                  <label for="RegisterModalInputName">Nome</label>
+                  <input th:field="*{name}" type="text" class="form-control" name="name" id="RegisterModalInputName" placeholder="Digite um Nome" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="RegisterModalInputChapters">Capítulos</label>
-                    <input th:field="*{chapters}" type="text" class="form-control" name="chapters" id="RegisterModalInputChapters" placeholder="Digite a Quantidade de Capítulos" required/>
+                  <label for="RegisterModalInputChapters">Capítulos</label>
+                  <input th:field="*{chapters}" type="text" class="form-control" name="chapters" id="RegisterModalInputChapters" placeholder="Digite a Quantidade de Capítulos" required/>
                 </div>
-
-                <div class="form-group">
-                    <label for="RegisterModalSelectPublisher">Editora</label>
-                    <select th:field="*{publisher}" class="form-control" name="publisher" id="RegisterModalSelectPublisher">
-                        <option th:each="publisherItem : ${publishersList}" th:value="${publisherItem.id}" th:text="${publisherItem.name}"></option>
-                    </select>
-                </div>
-
+                
               </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-success">Cadastrar</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>
           </form>
         </div>
@@ -91,20 +84,20 @@
                 
                 <div class="form-group">
                   <label for="UpdateModalInputName">Nome</label>
-                  <input th:field="*{name}" type="text" class="form-control MI" id="UpdateModalInputName" placeholder="Informe o Nome"/>
+                  <input th:field="*{name}" type="text" class="form-control" name="name" id="UpdateModalInputName" placeholder="Informe o Nome" required/>
                 </div>
                 
                 <div class="form-group">
-                    <label for="UpdateModalInputChapters">Capítulos</label>
-                    <input th:field="*{chapters}" type="text" class="form-control" name="chapters" id="UpdateModalInputChapters" placeholder="Digite a Quantidade de Capítulos" required/>
+                  <label for="UpdateModalInputChapters">Capítulos</label>
+                  <input th:field="*{chapters}" type="text" class="form-control" name="chapters" id="UpdateModalInputChapters" placeholder="Digite a Quantidade de Capítulos" required/>
                 </div>
-
-                <div class="form-group">
-                    <label for="UpdateModalSelectPublisher">Editora</label>
-                    <select th:field="*{publisher}" class="form-control" name="publisher" id="UpdateModalSelectPublisher">
-                        <option th:each="publisherItem : ${publishersList}" th:value="${publisherItem.id}" th:text="${publisherItem.name}"></option>
-                    </select>
-                </div>
+                
+                <!-- <div class="form-group">
+                  <label for="UpdateModalSelectPublisher">Editora</label>
+                  <select th:field="*{publisher}" class="form-control" name="publisher" id="UpdateModalSelectPublisher">
+                    <option th:each="publisherItem : ${publishersList}" th:value="${publisherItem.id}" th:text="${publisherItem.name}"></option>
+                  </select>
+                </div> -->
 
               </div>
             </div>
@@ -116,8 +109,8 @@
         </div>
       </div>
     </div>
-
-
+    
+    
 
     <!----- Modal Info --------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="modal fade" id="InfoModal" tabindex="-1" role="dialog" aria-labelledby="InfoModalLabel" aria-hidden="true">
@@ -130,6 +123,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                  <div class="row">
+                    <div class="col">Nome</div>
+                    <div class="col" id="WebInfoName"></div>
+                  </div>
                     <div class="row">
                         <div class="col">
                             <div class="row">
@@ -145,16 +142,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">Editora</div>
-                        <div class="col" id="WebInfoPublisher"></div>
+                      <div class="col">Editora</div>
+                      <div class="col" id="WebInfoPublisher"></div>
                     </div>
                     <div class="row">
-                        <div class="col">Artista</div>
-                        <div class="col" id="WebInfoArtist"></div>
+                      <div class="col">Artista</div>
+                      <div class="col" id="WebInfoArtist"></div>
                     </div>
                     <div class="row">
-                        <div class="col">Gêneros</div>
-                        <div class="col" id="WebInfoGenres"></div>
+                      <div class="col">Gêneros</div>
+                      <div class="col" id="WebInfoGenres"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -177,6 +174,7 @@
       <div class="navItem">
         <a th:href="@{/publisher/}">Editoras</a>
         <a th:href="@{/artist/}">Artistas</a>
+        <a th:href="@{/genre/}">Gêneros</a>
       </div>
     </nav>
 
@@ -219,7 +217,7 @@
                 <th th:text="${webtoon.id}" scope="row" class="col"></th>
                 <th th:text="${webtoon.name}" scope="row" class="col-9"></th>
                 <th class="btnArea col">
-                  <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateObj('${webtoon}')|">
+                  <a class="btn btn-warning" data-toggle="modal" data-target="#UpdateModal" th:attr="onclick=|UpdateWeb('${webtoon.id}', '${webtoon.name}', '${webtoon.chapters}', '${webtoon.publisher}', '${webtoon.artist}', '${webtoon.genres}')|">
                     <img th:src="@{/images/pencil.png}" alt="Pencil" width="30" height="30"/>
                   </a>
                   <a class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal" th:attr="onclick=|DeleteObj('/webtoon', '${webtoon.id}')|">

@@ -29,6 +29,7 @@ public class Webtoon {
     int chapters;
 
     @OneToOne
+    @JoinColumn(name = "publisher_id", referencedColumnName = "id")
     Publisher publisher;
 
     @ManyToOne

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.edu.ifms.relacionamentos.model.Artist;
 import br.edu.ifms.relacionamentos.model.Publisher;
 import br.edu.ifms.relacionamentos.model.Webtoon;
+import br.edu.ifms.relacionamentos.service.ArtistService;
 import br.edu.ifms.relacionamentos.service.PublisherService;
 import br.edu.ifms.relacionamentos.service.WebtoonService;
 
@@ -26,6 +28,9 @@ public class WebtoonController {
     @Autowired
     PublisherService publisherService;
 
+    @Autowired
+    ArtistService artistService;
+
 
     @GetMapping("/")
     public String listAllWebtoons(Model html) {
@@ -34,6 +39,8 @@ public class WebtoonController {
         html.addAttribute("noDataWebtoon", new Webtoon());
         List<Publisher> publishersList = publisherService.getAllPublishers();
         html.addAttribute("publishersList", publishersList);
+        List<Artist> artistsList = artistService.getAllArtists();
+        html.addAttribute("artistsList", artistsList);
         return "webtoon";
     }
 

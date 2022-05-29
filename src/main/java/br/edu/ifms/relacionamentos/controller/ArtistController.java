@@ -63,8 +63,14 @@ public class ArtistController {
     public String associateArtist(@PathVariable("ArtistID") int ArtistID, @PathVariable("WebtoonID") int WebtoonID) {
         Artist artist = artistService.getArtistById(ArtistID);
         Webtoon webtoon = webtoonService.getWebtoonById(WebtoonID);
-        artist.getWebtoons().add(webtoon);
+
+        List<Webtoon> artistWebtoonsList = artist.getWebtoons();
+        artistWebtoonsList.add(webtoon);
         artistService.saveArtist(artist);
+
+        webtoon.setArtist(artist);
+        webtoonService.saveWebtoon(webtoon);
+        
         return "redirect:/artist/";
     }
 }
