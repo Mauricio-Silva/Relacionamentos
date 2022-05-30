@@ -37,10 +37,6 @@ public class WebtoonController {
         List<Webtoon> webtoonsList = webtoonService.getAllWebtoons();
         html.addAttribute("webtoonsList", webtoonsList);
         html.addAttribute("noDataWebtoon", new Webtoon());
-        List<Publisher> publishersList = publisherService.getAllPublishers();
-        html.addAttribute("publishersList", publishersList);
-        List<Artist> artistsList = artistService.getAllArtists();
-        html.addAttribute("artistsList", artistsList);
         return "webtoon";
     }
 
@@ -57,11 +53,23 @@ public class WebtoonController {
         webtoonService.deleteWebtoonById(id);
         return "redirect:/webtoon/";
     }
-
-
+    
+    
     @PostMapping("/update/{id}")
     public String updateWebtoon(@PathVariable("id") int id, @ModelAttribute("noDataWebtoon") Webtoon webtoon) {
         webtoonService.saveWebtoon(webtoon);
         return "redirect:/webtoon/";
+    }
+
+
+    @GetMapping("/info/{id}")
+    public String infoWebtoon(Model html, @PathVariable("id") int id) {
+        Webtoon webtoon = webtoonService.getWebtoonById(id);
+        html.addAttribute("webtoon", webtoon);
+        List<Publisher> publishersList = publisherService.getAllPublishers();
+        html.addAttribute("publishersList", publishersList);
+        List<Artist> artistsList = artistService.getAllArtists();
+        html.addAttribute("artistsList", artistsList);
+        return "webInfo";
     }
 }

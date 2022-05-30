@@ -7,14 +7,7 @@
 
 
 
-//--- Publisher ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-function DeletePub(id) {
-    document.getElementById("DeleteModalButton").href = "/publisher/delete/" + id;
-}
-function UpdatePub(id, name) {
-    document.getElementById("UpdateModalForm").action = "/publisher/update/" + id;
-    document.getElementById("UpdateModalInputName").value = name;
-}
+
 
 
 
@@ -77,29 +70,41 @@ function AssGenToWebBySelect() {
 
 
 //--- Webtoon ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-function DeleteWeb(id) {
-    document.getElementById("DeleteModalButton").href = "/webtoon/delete/" + id;
+function InfoWeb(publisher, artist, genres) {
+    var TableInfoPublisher = document.getElementById("TableInfoPublisher");
+    var TableInfoArtist = document.getElementById("TableInfoArtist");
+    var TableInfoGenres = document.getElementById("TableInfoGenres");
+
+    if (publisher != 'null') {
+        console.log(new Publisher(publisher));
+    } 
+
+
+    // document.getElementById("WebInfoName").innerHTML = name;
+    // document.getElementById("WebInfoId").innerHTML = id;
+    // document.getElementById("WebInfoChapters").innerHTML = chapters;
+    // var publisherName = publisher.slice(publisher.indexOf("name") + 5, publisher.indexOf(")"))
+    // document.getElementById("WebInfoPublisher").innerHTML = publisherName;
+    // document.getElementById("WebInfoArtist").innerHTML = artist;
+    // document.getElementById("WebInfoGenres").innerHTML = genres;
 }
-function UpdateWeb(id, name, chapters, publisher, artist, genres) {
-    document.getElementById("UpdateModalForm").action = "/webtoon/update/" + id;
-    document.getElementById("UpdateModalInputName").value = name;
-    document.getElementById("UpdateModalInputChapters").value = chapters;
-    var publisherId = publisher.slice(publisher.indexOf("id") + 3, publisher.indexOf(","))
-    document.getElementById("UpdateModalSelectPublisher").value = publisherId;
+
+
+
+class Publisher {
+    constructor(id, name) {
+      this.id = id; 
+      this.name = name;
+    }
+
+    get id() {
+        return this.id;
+    }
+
+    get name() {
+        return this.name;
+    }
 }
-function ShowWebInfo(id, name, chapters, publisher, artist, genres) {
-    document.getElementById("WebInfoName").innerHTML = name;
-    document.getElementById("WebInfoId").innerHTML = id;
-    document.getElementById("WebInfoChapters").innerHTML = chapters;
-    var publisherName = publisher.slice(publisher.indexOf("name") + 5, publisher.indexOf(")"))
-    document.getElementById("WebInfoPublisher").innerHTML = publisherName;
-    document.getElementById("WebInfoArtist").innerHTML = artist;
-    document.getElementById("WebInfoGenres").innerHTML = genres;
-}
-
-
-
-
 
 
 

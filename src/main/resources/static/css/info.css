@@ -25,10 +25,6 @@ nav .navItem {
     justify-content: space-around;
     width: 250px;
 }
-nav .navItem a {
-    color: #fff;
-    text-decoration: none;
-}
 nav .navItem img {
     width: 30px;
     height: 30px;
@@ -46,11 +42,13 @@ header {
 
 
 tbody tr {
-    line-height: 44px;
+    line-height: 40px;
+}
+tbody td {
+    padding-top: 20px !important;
 }
 .btnArea {
-    display: flex; 
-    justify-content: space-around;
+    margin-left: 20px;
 }
 
 
